@@ -49,4 +49,14 @@ class filefield_meta_handler_field_bitrate extends views_handler_field_numeric {
       return '';
     }
 
-    s
+    switch ($this->options['format']) {
+      case 'raw':
+        $output = $value;
+        break;
+      default:
+        $output = theme('filefield_meta_bitrate', $value);
+    }
+
+    return check_plain($this->options['prefix']) . $output . check_plain($this->options['suffix']);
+  }
+}
