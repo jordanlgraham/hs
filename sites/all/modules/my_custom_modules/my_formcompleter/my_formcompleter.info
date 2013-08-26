@@ -1,0 +1,4 @@
+; $Id$
+name = My Form Completer
+description = A description of what your module does.
+core = 6.x

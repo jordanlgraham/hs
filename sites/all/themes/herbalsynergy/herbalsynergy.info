@@ -1,0 +1,26 @@
+; $Id: herbalsynergy.info,v 1.0 2010/07/30 09:23:32 goba Exp $
+name = HerbalSynergy
+description = Custom, fixed-width theme for Herbal Synergy, LLC.
+version = VERSION
+core = 6.x
+engine = phptemplate
+regions[left] = Left
+regions[right] = Right
+regions[content] = Content
+regions[header] = Header
+regions[footer] = Footer
+regions[tab1] = Tab1
+regions[tab2] = Tab2
+regions[menu] = Menu
+regions[col1] = Column1
+regions[col2] = Column2
+regions[col3] = Column3
+regions[above_comments] = Above Comments
+stylesheets[all][] = style.css
+stylesheets[print][] = print.css
+
+; Information added by drupal.org packaging script on 2010-7-6
+version = "6.19"
+project = "drupal"
+datestamp = "1260996916"
+

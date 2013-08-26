@@ -1,0 +1,169 @@
+<?php
+
+/**
+ * @file
+ * Primarily Drupal hooks and taxonomy replacement functions
+ * @author domdic
+ * @author reptilex
+ * @author rkeppner
+ *
+ * Drupal 6 version by domidc; additional features by rkeppner;
+ * some features by reptilex backported from Drupal 7 version by rkeppner.
+ */
+
+/**
+ *  Implementation hook_menu()
+ */
+function taxonomy_autocomplete_settings_menu() {
+  $items = array();
+  $items['admin/settings/taxonomy-autocomplete-settings'] = array(
+    'title' => t('Taxonomy autocomplete'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('taxonomy_autocomplete_settings_settings_form'),
+    'access arguments' => array('administer taxonomy autocomplete settings'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'taxonomy_autocomplete_settings.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implementation hook_perm()
+ */
+function taxonomy_autocomplete_settings_perm() {
+  return array('administer taxonomy autocomplete settings');
+}
+
+/**
+ * Implementation of hook_menu_alter().
+ *
+ * Take over the taxonomy autocompletion
+ */
+function taxonomy_autocomplete_settings_menu_alter(&$items) {
+  $items['taxonomy/autocomplete']['module'] = 'taxonomy_autocomplete_settings';
+  $items['taxonomy/autocomplete']['file'] = '';
+  if (module_exists('i18ntaxonomy')) {
+    $items['taxonomy/autocomplete']['page callback'] = 'taxonomy_autocomplete_settings_i18ntaxonomy_autocomplete';
+  }
+  else {
+    $items['taxonomy/autocomplete']['page callback'] = 'taxonomy_autocomplete_settings_taxonomy_autocomplete';
+  }
+}
+
+/**
+ * Custom function that handles a setting to complete or
+ *
+ * Helper function for autocompletion.
+ *
+ * @ TODO Optimized localization. We cannot just tt() huge lists of terms.
+ */
+function taxonomy_autocomplete_settings_i18ntaxonomy_autocomplete($vid, $string = '') {
+  // The user enters a comma-separated list of tags. We only autocomplete the last tag.
+  $array = drupal_explode_tags($string);
+
+  // Is this vocabulary localizable?
+  $localizable = i18ntaxonomy_vocabulary($vid) == I18N_TAXONOMY_LOCALIZE;
+
+  // Fetch last tag.
+  $last_string = trim(array_pop($array));
+  $matches = array();
+  if ($last_string != '') {
+    $num_results = (int) variable_get('taxonomy_autocomplete_settings_results_'.$vid, 10);
+    if (variable_get('taxonomy_autocomplete_settings_'.$vid, 0) == 0) {
+      $autocomplete = '%%';
+    }
+    $result = db_query_range(db_rewrite_sql("SELECT t.tid, t.name FROM {term_data} t WHERE t.vid = %d AND LOWER(t.name) LIKE LOWER('$autocomplete%s%%')", 't', 'tid'), $vid, $last_string, 0, $num_results);
+
+    $prefix = count($array) ? implode(', ', $array) .', ' : '';
+
+    while ($tag = db_fetch_object($result)) {
+      $n = $tag->name;
+      // Commas and quotes in terms are special cases, so encode 'em.
+      if (strpos($tag->name, ',') !== FALSE || strpos($tag->name, '"') !== FALSE) {
+        $n = '"'. str_replace('"', '""', $tag->name) .'"';
+      }
+      $matches[$prefix . $n] = check_plain($tag->name);
+    }
+
+    // If less than max matches, add second search with middle string in terms.
+    if (variable_get('taxonomy_autocomplete_settings_second_search_'. $vid, FALSE)) {
+      $amount_matches = count($matches);
+      if ($amount_matches < $num_results) {
+        $result = db_query_range(db_rewrite_sql("SELECT t.tid, t.name FROM {term_data} t WHERE t.vid = %d AND LOWER(t.name) LIKE LOWER('%%%s%%')", 't', 'tid'), $vid, $last_string, 0, $num_results - $amount_matches);
+
+        $prefix = count($array) ? implode(', ', $array) .', ' : '';
+
+        while ($tag = db_fetch_object($result)) {
+          $n = $tag->name;
+          // Commas and quotes in terms are special cases, so encode 'em.
+          if (strpos($tag->name, ',') !== FALSE || strpos($tag->name, '"') !== FALSE) {
+            $n = '"'. str_replace('"', '""', $tag->name) .'"';
+          }
+          $matches[$prefix . $n] = check_plain($tag->name);
+        }
+      }
+    }
+  }
+
+  drupal_json($matches);
+}
+
+/**
+ * Helper function for autocompletion
+ */
+function taxonomy_autocomplete_settings_taxonomy_autocomplete($vid, $string = '') {
+  // The user enters a comma-separated list of tags. We only autocomplete the last tag.
+  $array = drupal_explode_tags($string);
+
+  // Fetch last tag
+  $last_string = trim(array_pop($array));
+  $matches = array();
+  if ($last_string != '') {
+    $num_results = (int) variable_get('taxonomy_autocomplete_settings_results_'.$vid, 10);
+    if (variable_get('taxonomy_autocomplete_settings_'.$vid, 0) == 0) {
+      $autocomplete = '%%';
+    }
+    $result = db_query_range(db_rewrite_sql("SELECT t.tid, t.name FROM {term_data} t WHERE t.vid = %d AND LOWER(t.name) LIKE LOWER('$autocomplete%s%%')", 't', 'tid'), $vid, $last_string, 0, $num_results);
+
+    $prefix = count($array) ? implode(', ', $array) .', ' : '';
+
+    while ($tag = db_fetch_object($result)) {
+      $n = $tag->name;
+      // Commas and quotes in terms are special cases, so encode 'em.
+      if (strpos($tag->name, ',') !== FALSE || strpos($tag->name, '"') !== FALSE) {
+        $n = '"'. str_replace('"', '""', $tag->name) .'"';
+      }
+      $matches[$prefix . $n] = check_plain($tag->name);
+    }
+
+    // If less than max matches, add second search with middle string in terms.
+    if (variable_get('taxonomy_autocomplete_settings_second_search_'. $vid, FALSE)) {
+      $amount_matches = count($matches);
+      if ($amount_matches < $num_results) {
+        $result = db_query_range(db_rewrite_sql("SELECT t.tid, t.name FROM {term_data} t WHERE t.vid = %d AND LOWER(t.name) LIKE LOWER('%%%s%%')", 't', 'tid'), $vid, $last_string, 0, $num_results - $amount_matches);
+
+        $prefix = count($array) ? implode(', ', $array) .', ' : '';
+
+        while ($tag = db_fetch_object($result)) {
+          $n = $tag->name;
+          // Commas and quotes in terms are special cases, so encode 'em.
+          if (strpos($tag->name, ',') !== FALSE || strpos($tag->name, '"') !== FALSE) {
+            $n = '"'. str_replace('"', '""', $tag->name) .'"';
+          }
+          $matches[$prefix . $n] = check_plain($tag->name);
+        }
+      }
+    }
+  }
+
+  drupal_json($matches);
+}
+
+function taxonomy_autocomplete_settings_taxonomy($op, $type, $array = NULL) {
+  if ($op == 'delete' && $type == 'vocabulairy') {
+    variable_del('taxonomy_autocomplete_settings_'.$array['vid']);
+    variable_del('taxonomy_autocomplete_settings_results_'.$array['vid']);
+    variable_del('taxonomy_autocomplete_settings_second_search_'.$array['vid']);
+  }
+}

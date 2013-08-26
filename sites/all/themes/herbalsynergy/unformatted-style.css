@@ -1,0 +1,838 @@
+@import url(reset.css);
+@import url(featuredcontentglider.css);
+
+
+/* =global~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+* {	margin:0;	padding:0;}
+
+html,body {	height:100%;	width:100%;}
+
+body { 
+	background: #6f6f6f url(img/back.gif) fixed repeat-x;
+	font-family: verdana, helvetica, arial, sans-serif;
+	font-size: 14px; 	
+	line-height: normal;
+	color:#fff;	
+	margin: 0 auto;	
+	padding: 0;
+	text-align: center; 
+}
+
+img {margin: 0; padding: 0;}
+
+a, a:visited {color: #3BFF3B; text-decoration: none;}
+
+a:hover {color: #08ee22;}
+
+a img { border: none; }
+
+p { margin: 0 0 20px 0;}
+
+.sm {font-size: 11px; line-height: normal}
+
+.lrg {font-size: 1.2em;}
+
+.caps {text-transform: uppercase;}
+
+ul, li { margin-left: 0; padding-left: 0; list-style-type: none;}
+
+li a.active{ color: #22ff22;}
+	
+
+.right { float: right; text-align: left;}
+
+.left {float: left; text-align: left;}
+
+.clear {clear:both}
+
+.noMargin {margin: 0;}
+
+/*=== headings ===================================================================*/ 
+
+h1 {font: normal 210% Helvetica,Arial,sans-serif; margin-bottom: 10px; margin-top: 20px;}
+h2 {font: bold 200% system,sans-serif; margin:0 0 0 10px;}
+h3 {font: bold 200% eurostile,Verdana,Helvetica,Arial,sans-serif;	margin-bottom: 0;	margin-top:0;color: #fff; float: left;}
+h4 {font: bold 130% Helvetica,Arial,sans-serif; margin-bottom:0; margin-top:0;}
+h5 {font: normal 140% Helvetica,Arial,sans-serif; margin-bottom:0;	margin-top:0; display: inline; background: #fff;}
+h6 {font: bold 120% Helvetica,Arial,sans-serif; margin-bottom: 0; margin-top:10px; text-transform: uppercase; float: left;}
+
+
+/*=== main layout ===================================================================*/ 
+
+
+#outer {
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	margin: 0 auto;
+	padding: 0;
+	text-align: center;
+}	
+
+#sloganBox {
+	position: relative;
+	width: 980px;
+	height: 62px;
+	margin: 0 auto 10px auto;
+	color: #fff;
+	text-align: left;
+}
+
+#greenBox {
+	position: relative;
+	width: 980px;
+	height: 100px;
+	margin: 0 auto;
+	padding: 0;
+	color: #fff;
+	text-align: left;
+}
+
+h2.pageTitle {
+	position: absolute;
+	bottom: 0;
+}	
+h2.slogan {
+	font: bold 120% arial;
+	margin:0;	
+}	
+#topOuter  {	
+	position: relative;
+	width: 980px;
+	height: 154px;
+	margin: 0 auto 10px auto;
+	text-align: center; 
+	padding: 0;
+	background: #262626 url(img/nav.gif) bottom repeat-x;
+}
+
+#siteInfo {
+ float: left;
+ width: 320px;
+ }
+	
+.trans{
+	position: absolute;
+	background:#08ee22;
+	filter:alpha(opacity=90);
+	-moz-opacity:0.90;
+	opacity: 0.90; 
+	padding: 0;
+	margin: 0;
+	width: 980px;
+	height: 100px;	
+}
+
+.op{
+	position: relative;	
+	width: 978px;
+	padding: 0;
+	border: 1px solid #bbffbb;
+	height: 98px;
+}		
+
+#searchWidget {
+	position: relative;
+	height: 100px;	
+}
+	
+#nav  {
+	position: relative;
+	clear: both;
+	height: 42px;
+	width: 980px;
+	padding: 0;
+	margin: 0 auto;
+	text-align: center;
+}
+
+
+
+#footer {
+	clear: both;
+	width: 980px;
+	min-height: 70px;
+	margin: 10px auto;
+	border-top: 2px solid #fff;
+	text-align: center;
+	display: block;
+	padding: 10px 0 0 0;
+	font-size: 11px;
+
+}
+
+.vert {
+clear: both;
+float: none;
+height: 10px;
+width: 100%;
+background: #f2f2f2;
+margin: 0 0 10px 0;	
+}
+	
+.contentOuter {
+	width: 980px;
+	margin: 0 auto;
+	padding: 0;
+}	
+
+.contentInner { 
+	position: relative;
+	clear: both;
+	display: block;
+	margin: 0 auto;
+	width: 100%;
+	text-align: left; 
+	overflow: hidden;
+}
+
+.submitted {
+	display: none;
+}
+
+.content {
+ 	float: left;
+	width: 510px;
+	padding: 10px;
+	margin: 0;
+	display: inline;
+  color: #fff;
+ }
+
+.content p {
+	padding: 0;
+}
+
+.content-images {
+	width: 430px;
+	margin: -50px 0 0 0;
+	padding: 0 20px 0 0;
+	position: relative;
+	float: right;
+	overflow: hidden;
+}	
+.content-img img {
+	display: block;
+	float: none;
+	margin: 0;
+}		
+/*=== columns ===================================================================*/ 
+
+
+.col2 {
+	width: 420px;
+	height: auto;
+	padding: 0 10px;
+	margin: 0;
+	display: inline;
+}
+
+ul.menu {
+	float: left;
+  text-align: left; /* set to left, right or center */
+  margin: 1em 0 1em 0; /* set margins as desired */
+  font: normal 11px verdana, arial, sans-serif; /* set font as desired */
+  border-bottom: 0px solid #ccc; /* set border COLOR as desired */
+  list-style-type: none;
+  padding: 3px 0px 3px 0px; /* THIRD number must change with respect to padding-top (X) below */
+}
+
+ul.menu li {
+  display: inline;
+  background: none;
+  padding: 0;
+}
+
+ul.menu li a, ul.menu li a:visited {
+  padding: 4px 9px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+  background: none;
+  color: #fff; /* set unselected tab link color as desired */
+  margin-right: 0px; /* set additional spacing between tabs as desired */
+  text-decoration: none;
+  border-top: 0px solid #000;
+  border-right: 0px solid #000;
+  border-bottom: 0px solid #000;
+  border-left: 0px solid #000;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
+}
+
+ul.menu li a.active { 
+  background: none;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #fff;
+  color: #fff; /* set selected tab link color as desired */
+  position: relative;
+  padding-top: 3px; /* must change with respect to padding (X) above and below */
+}
+
+/*=== tabs ===================================================================*/ 
+
+
+/**
+ * CSS Tabs
+ *
+ * Copy these rules to your theme's stylesheet to override!
+ * Inspired by: http://unraveled.com/publications/assets/css_tabs/index.html
+ */
+
+.viewsdisplaytabs-wrapper .viewsdisplaytabs-group-wrapper {
+  float: left;
+  margin: 0 .5em;
+}
+
+.viewsdisplaytabs-wrapper .viewsdisplaytabs-group-wrapper ul {
+	float: left;
+  text-align: left; /* set to left, right or center */
+  margin: 1em 0 1em 0; /* set margins as desired */
+  font: normal 11px verdana, arial, sans-serif; /* set font as desired */
+  border-bottom: 0px solid #ccc; /* set border COLOR as desired */
+  list-style-type: none;
+  padding: 3px 0px 3px 0px; /* THIRD number must change with respect to padding-top (X) below */
+}
+
+.viewsdisplaytabs-wrapper .viewsdisplaytabs-group-wrapper ul li {
+  display: inline;
+  background: none;
+  padding: 0;
+}
+
+.viewsdisplaytabs-wrapper .viewsdisplaytabs-group-wrapper ul li a {
+  padding: 4px 9px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+  background: none;
+  color: #33cc22; /* set unselected tab link color as desired */
+  margin-right: 0px; /* set additional spacing between tabs as desired */
+  text-decoration: none;
+  border-top: 0px solid #000;
+  border-right: 0px solid #000;
+  border-bottom: 0px solid #000;
+  border-left: 0px solid #000;
+  -webkit-border-radius: 0 0 0 0;
+  -moz-border-radius: 0 0 0 0;
+  border-radius: 0 0 0 0;
+}
+
+
+	
+.viewsdisplaytabs-wrapper .viewsdisplaytabs-group-wrapper ul li.last a {
+  margin-right: 4px; /* set additional spacing between tabs as desired */
+}
+
+.viewsdisplaytabs-wrapper .viewsdisplaytabs-group-wrapper ul li a.viewsdisplaytabs-active { 
+  background: none;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #fff;
+  color: #fff; /* set selected tab link color as desired */
+  position: relative;
+  top: 0px;
+  padding-top: 3px; /* must change with respect to padding (X) above and below */
+}
+
+.viewsdisplaytabs-wrapper-closure {
+  clear: both;
+}
+
+.viewsdisplaytabs-wrapper .viewdisplaytabs-group-wrapper ul li a:hover {
+  border-top: 1px solid #fff !important;
+  border-right: 1px solid #fff !important;
+  border-bottom: 1px solid #fff;
+  border-left: 1px solid #fff;	
+}
+
+/**
+ * Administration page
+ */
+table.viewsdisplaytabs-admin td {
+  vertical-align: top;
+}
+
+/* Uses CSS3 nth-child(n) selector */
+table.viewsdisplaytabs-admin td:nth-child(4) {
+  padding-top: .7em;
+}
+
+form#-viewsdisplaytabs-admin dt {
+  font-weight: bold;
+}
+
+/*=== secondary layout ===================================================================*/
+
+#top {
+	width: 980px;
+	height: 112px;
+	margin: 0 auto;
+	padding: 0;		
+}	
+
+#logo {
+	position: absolute;
+	left: 183px;
+	width: 465px;
+	height: 112px;
+	padding: 0;
+	display: block;
+}
+
+#logo h1 {visibility: hidden; margin: 0; padding: 0; display: none; line-height: 0;}
+
+#logo img {display: block;}
+
+#logoBot {
+	display: block;
+	position: absolute;
+	height: 42px;
+	width: 144px;	
+	top: 0px;
+	left: 280px;
+	z-index: 999;
+}	
+
+.disclaimer {
+	clear: both;
+	width: 400px;
+	padding: 30px 0 0 0;
+	margin: 0 auto;	
+}
+	
+html.js a.views-throbbing,
+html.js span.views-throbbing {
+  background:url(img/status-active.gif) no-repeat right center;
+  padding-right:18px;
+}
+
+#adv2 {
+	display: block;
+	height: 28px;
+	width: auto;
+	float: none;
+	list-style: none;
+	text-align: right;
+	padding: 3px 0 0 15px;
+}
+
+#adv2 li {
+	display: block;
+	float: left;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	font-size: 11px;
+}
+
+#adv2 li a {
+	display: block;
+	margin: 0 0 0 10px;
+	padding: 5px;
+	text-transform: uppercase;
+	background: none;
+	color: #fff; 
+}
+
+#adv2 li a.selected {
+	background: url(img/arrow-on.gif) bottom center no-repeat;
+	border: 1px solid #fff;
+	padding: 4px;
+}
+
+/*=== views ===================================================================*/
+
+.view-filters {
+	display: block;
+	position: absolute;
+	top: 35px;
+	border: 0;	
+}
+
+.views-row {
+	clear: both;
+	display: block;
+	position: relative;
+	width: 960px;
+	float: none;
+	border-top: 5px solid #f6f6f6;	
+	margin: 0;
+	padding: 10px;
+ }
+
+.gmap-gmap {
+	float: right;	
+}	
+
+.location {
+	float: left;
+}	
+	
+.views-field-field-images-fid img{
+	border: 3px solid #fff;
+	display: block;
+}
+	
+.imagecache-default_thumb {
+	border: 5px solid #fff;
+	width: 420px;
+	margin: 0;
+}
+
+.views-field-description {
+	clear: left;
+}	
+
+.magnify {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}	
+/*=== views-care-centers ===================================================================*/
+
+.views-field-title {
+	float: left;
+	font-weight: bold;
+}
+
+.views-field-street {
+	clear: left;
+	float: left;
+}
+
+.views-field-city {
+	float: right;
+}
+
+.views-field-province {
+	float: right;
+}
+
+.views-field-postal-code {
+	clear: both;
+	float: right;
+}
+	
+.views-row label {
+	display: block;	
+	font-size: 80%;
+	font-weight: normal;
+}
+
+.views-field-field-images-fid {
+	float: left;
+  padding: 0;
+  margin: 0;
+  height: 74px;
+  width: 166px;
+  
+}
+.field-content {
+	font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+.views-field-field-images-content {
+	padding: 0;
+  margin: 0;
+}
+
+.views-table {
+  width: 980px;
+  background: 	
+}
+			
+.views-field-name {
+	font-weight: bold;
+	padding: 10px 0 0 10px;
+}
+
+.views-field-created {
+	clear: left;
+	float: left;
+	font-size: 80%;
+	padding: 0;
+	top: -30px;
+	left: 166px;
+	position: relative;
+}		
+	
+.views-field-field-disp-name-nid  {
+	position: relative;
+	clear: left;
+	float: left;
+	font-size: 80%;
+	padding: 0;
+	top: -30px;
+	left: 166px;
+}
+
+tr.even, tr.odd {
+	background-color: transparent;
+  border-bottom: 5px solid #f2f2f2;
+  padding: 0.1em 0.6em;
+}
+	
+.views-field-cid1 {
+	float: right;
+	font-weight: bold;
+	text-align: right;	
+	padding: 10px 0 0 20px;
+}
+	
+.views-field-field-cbd-value {
+  float: right;
+  padding: 10px 0 0 20px;
+}
+
+.views-field-field-cbn-value {
+  float: right;
+  padding: 10px 0 0 20px;
+}
+
+.views-field-field-thc-value {
+  float: right;
+  padding: 10px 0 0 20px;
+}
+
+.views-field-field-indica-value {
+  float: right;
+  padding: 10px 0 0 20px;
+}
+
+.views-field-field-sativa-value {
+  float: right;
+  padding: 10px 0 0 20px;
+}
+.views-exposed-widgets {
+	width: 960px;
+	padding: 0 10px;
+	color: #fff;
+}	
+/*=== navigation ===================================================================*/
+
+#page-bar {
+	float: left;
+	font-size: 11px;
+	font-family: verdana,helvetica,sans-serif;
+	padding: 0;
+	z-index: 2;
+	width: 440px;
+}
+
+#page-bar-2 {
+	float: right;
+	font-size: 11px;
+	font-family: verdana,helvetica,sans-serif;
+	padding: 0;
+	width: 540px;
+}
+
+#page-bar li {
+	position: relative;
+	float: left;
+	margin: 0;
+	padding: 0;
+	list-style:none;
+ 	cursor: pointer;
+	display:block;
+	height: 42px;
+}
+
+#page-bar-2 li {
+	position:relative;
+	float: right;
+	margin: 0;
+	padding: 0;
+	list-style:none;
+ 	cursor: pointer;
+	display:block;
+	height: 42px;
+}
+
+#page-bar a, #page-bar a:visited {
+	margin: 0;
+	padding: 15px 30px 15px 30px;
+	display: block;
+	line-height: 12px;
+	text-decoration: none;
+	color: #d2d2d2;
+	border-left: 1px solid #141414;
+	font-weight: bold;
+}
+
+#page-bar-2 a, #page-bar-2 a:visited {
+	margin: 0;
+	padding: 15px 30px 15px 30px;
+	display: block;
+	line-height: 12px;
+	text-decoration: none;
+	color: #d2d2d2;
+	border-right: 1px solid #101010;
+	font-weight: bold;
+}
+	
+#page-bar a:hover, #page-bar li:hover, #page-bar-2 a:hover, #page-bar-2 li:hover  {
+	background: url(img/nav-current.gif) repeat-x;
+}
+
+li.active-trail {
+	
+}
+	
+.active-trail a, .active-trail a:visited {
+	color:#fff;
+  background: url(img/arrow-on.gif) bottom center no-repeat;
+}
+
+/*=== Dropdown Menus ===================================================================*/
+
+
+#page-bar li ul, #page-bar-2 li ul {
+	position: absolute;
+	display: block;
+	margin: 0;
+	padding: 0;
+	width: 160px;
+	left: -999em;
+	z-index: 999;
+	background: #222;
+	}
+
+
+#page-bar li li, #page-bar-2 li li {
+	float: none;
+	text-align: left;
+	margin: 0;
+	padding: 0;
+	height: auto;
+	text-transform:none;
+}
+
+#page-bar li li a, #page-bar li li a:link, #page-bar li li a:visited, #page-bar-2 li li a, #page-bar-2 li li a:link, #page-bar-2 li li a:visited {
+	display: block;
+	float: none;
+	margin: 1px;
+	padding: 5px;
+	color: #fff;
+	background: #141414;
+	border: 1px solid #141414;
+}
+
+#page-bar li li a:hover {
+	color: #fff;
+	border: 1px solid #00bb00;
+}
+
+#page-bar li:hover ul, #page-bar li.sfhover ul {
+	left: 0;
+}
+
+#page-bar-2 li:hover ul, #page-bar-2 li.sfhover ul {
+	right: 0;
+}
+
+/*=== Form Elements ===================================================================*/
+
+select {
+	border:1px solid #ccc;
+	width:100%;
+}	
+
+input {
+	padding: 0;
+	border: 1px solid #fff;
+	background: #fff;
+	font-size:1.0em;
+	display: block;
+	float: none;
+}
+
+input.form-submit {
+padding: 3px 6px;
+margin-top: 1em !important;
+font-weight: bold;
+border: 1px solid #000;
+color: #f6f6f6;
+background: #009900;	
+}
+	
+
+/* =----------------------------------- meta lead for each post */
+
+span.date, span.author, span.comments { font-size: 0.8em; font-weight: bold; margin: 0; letter-spacing: -0.02em; text-transform: uppercase; padding-right: 5px;}
+
+span.share {font-size: 0.8em; font-weight: bold; letter-spacing: -0.02em; text-transform: uppercase; }
+
+span.author {color: #131313;}
+
+span.date { }
+	
+span.comments a { background: url(img/comment.gif) no-repeat right center; padding-right: 12px;} 
+
+
+/* =----------------------------------- spacing */
+
+
+.noMargin {
+	margin: 0;
+	padding: 0;
+}
+
+.vertSpacer {
+	width: auto; 
+	height: 10px;
+	padding: 0;
+	background: none;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 10px;
+	margin-left: 0;
+	border-bottom: 1px dotted #ccc;
+	clear: both;
+}
+
+
+
+.tags a { 
+	padding-left: 5px;
+}
+
+
+
+/*=----------------------------------- float properties */
+
+
+.clearfix:after {
+	content:".";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
+	}
+
+.clearfix {
+	display: inline-block;
+	clear: both;
+	margin: 0;
+	padding: 0;
+	}
+
+
+/*=----------------------------------- Hides from IE-mac */
+
+
+* html .clearfix {
+	height:1%;
+	}
+
+*+html .clearfix {
+	height:1%;
+	}
+
+div.clearfix {
+	display:block;
+	clear: both;
+	margin: 0;
+	padding: 0;
+	}
