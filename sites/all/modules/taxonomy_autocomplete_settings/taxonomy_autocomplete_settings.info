@@ -1,0 +1,11 @@
+name = Taxonomy autocomplete settings
+description = Add settings to the taxonomy autocomplete
+core = 6.x
+dependencies[] = taxonomy
+
+; Information added by drupal.org packaging script on 2012-04-06
+version = "6.x-1.3"
+core = "6.x"
+project = "taxonomy_autocomplete_settings"
+datestamp = "1333678877"
+

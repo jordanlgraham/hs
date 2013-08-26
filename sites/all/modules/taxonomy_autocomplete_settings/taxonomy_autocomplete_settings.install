@@ -1,0 +1,17 @@
+<?php
+
+function taxonomy_autocomplete_settings_install() {
+  //makes sure this modules hooks are called after taxonomy and i18ntaxonomy
+  $weight = db_result(db_query("SELECT weight FROM {system} WHERE name IN ('%s', '%s') ORDER by weight DESC", 'taxonomy', 'i18ntaxonomy'));
+  $weight++;
+  db_query("UPDATE {system} SET weight = %d WHERE name = '%s'", $weight, 'taxonomy_autocomplete_settings');
+}
+
+function taxonomy_autocomplete_settings_uninstall() {
+  $result = db_query("SELECT vid, name FROM {vocabulary}");
+  while ($row = db_fetch_object($result)) {
+    variable_del('taxonomy_autocomplete_settings_'. $row->vid);
+    variable_del('taxonomy_autocomplete_settings_results_'. $row->vid);
+    variable_del('taxonomy_autocomplete_settings_second_search_'. $row->vid);
+  }
+}

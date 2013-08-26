@@ -1,0 +1,68 @@
+<?php
+// $Id: my_formcompleter.module
+/**
+* Implementation of hook_form_alter().
+*
+* This lets you make changes to any form in the site. You can alter, remove
+* or add form elements. You can also alter the validation and submission
+* behavior. The name will always be modulename_form_alter.
+*/
+
+function my_formcompleter_menu() {
+  $items['data/dispensaries/autocomplete'] = array(
+    'title' => 'Autocomplete Dispensaries',
+    'page callback' => 'data_dispensaries_autocomplete',
+    'access' => TRUE,
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  
+  return $items;
+}
+
+function my_formcompleter_form_alter(&$form, &$form_state, $form_id) {
+
+if( ereg('views-exposed-form-dispensaries', $form['#id'])) {
+  $form['name'] = array(
+    '#type' => 'textfield',
+    '#default_value' => $typed_string,
+    '#size' => 30,
+    '#maxlength' => 100,
+    '#autocomplete_path' => 'data/dispensaries/autocomplete'
+  );
+   
+   $form['postal_code']['#size'] = '10';
+    
+//echo "<pre>";print_r($form);echo "</pre>";
+ }
+ 
+
+if( ereg('views-exposed-form-samples', $form['#id'])) {
+ 
+   $form['title'] = array(
+    '#type' => 'textfield',
+    '#default_value' => $typed_string,
+    '#size' => 30,
+    '#maxlength' => 100,
+    '#autocomplete_path' => 'data/dispensaries/autocomplete'
+  );   
+   $form['tid_2']['#size'] = '30';
+   $form['postal_code']['#size'] = '10';
+    
+//echo "<pre>";print_r($form);echo "</pre>";
+ }
+ 
+}
+
+function data_dispensaries_autocomplete($string='') {
+$matches = array();
+if ($string) {
+$result = db_query_range("SELECT title FROM {node} WHERE type = 'dispensary' AND LOWER(title) LIKE LOWER('%%%s%%')",$string,0,10);
+while ($data = db_fetch_object($result)) {
+$matches[$data->title] = check_plain($data->title);
+
+}
+}
+print drupal_to_js($matches);
+
+}
